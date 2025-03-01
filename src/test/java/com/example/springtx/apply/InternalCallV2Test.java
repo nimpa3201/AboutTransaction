@@ -57,7 +57,7 @@ public class InternalCallV2Test {
         public void external(){
             log.info("call external");
             this.printInfo();
-            internalService.internal(); // this(생략) 나 자신의 인스턴스 호출 --> 내부 호출은 프록시를 무시함.
+            internalService.internal();
         }
 
         @Transactional
