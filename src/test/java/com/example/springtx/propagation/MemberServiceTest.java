@@ -109,5 +109,30 @@ class MemberServiceTest {
 
     }
 
+    /**
+     * memberService    @Transactionl : ON
+     * memberRepository @Transactionl : ON
+     * logRepository   @Transactionl : ON Excption
+     */
+    @Test
+    void outerTxOn_fail() {
+
+        //given
+        String username = "로그예외_outerTxOn_fail";
+
+
+        //when
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> memberService.joinV1(username))
+            .isInstanceOf(RuntimeException.class);
+
+        //then
+        assertTrue(memberRepository.find(username).isEmpty()); // memger 저장( 커밋 성공)
+        assertTrue(logRepository.find(username).isEmpty()); // 롤백
+
+    }
+
+
+
+
 
 }
