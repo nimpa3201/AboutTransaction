@@ -88,4 +88,26 @@ class MemberServiceTest {
     }
 
 
+    /**
+     * memberService    @Transactionl : ON
+     * memberRepository @Transactionl : ON
+     * logRepository   @Transactionl : ON
+     */
+    @Test
+    void outerTxON_success() { //논리 트랜잭션 생김
+
+        //given
+        String username = " outerTxOn_success";
+
+
+        //when
+        memberService.joinV1(username);
+
+        //then
+        assertTrue(memberRepository.find(username).isPresent());
+        assertTrue(logRepository.find(username).isPresent());
+
+    }
+
+
 }
