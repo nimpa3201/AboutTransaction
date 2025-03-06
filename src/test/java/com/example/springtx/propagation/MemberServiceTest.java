@@ -66,4 +66,26 @@ class MemberServiceTest {
     }
 
 
+    /**
+     * memberService    @Transactionl : ON
+     * memberRepository @Transactionl : OFF
+     * logRepository   @Transactionl : OFF
+     */
+    @Test
+    void sigle_Tx() { // 같은 트랜잭션 사용하여 같은 커넥션 1개 사용
+
+        //given
+        String username = " outerTxOff_success";
+
+
+        //when
+        memberService.joinV1(username);
+
+        //then
+        assertTrue(memberRepository.find(username).isPresent());
+        assertTrue(logRepository.find(username).isPresent());
+
+    }
+
+
 }
