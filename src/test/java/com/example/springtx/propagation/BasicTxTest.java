@@ -142,7 +142,7 @@ public class BasicTxTest {
 
         log.info("외부 트랜잭션 커밋");
 
-        Assertions.assertThatThrownBy(()->txManger.commit(outer))
+        Assertions.assertThatThrownBy(() -> txManger.commit(outer))
             .isInstanceOf(UnexpectedRollbackException.class);// UnexpectedRollbackException 발생 시스템 입장에서 커밋을 시도했으나 롤백되었음을 알려야함
 
         //외부 트랜잭션이 롤백되면 내부 트랜잭션도 롤백
@@ -150,7 +150,7 @@ public class BasicTxTest {
     }
 
     @Test
-    void inner_rollback_requires_new(){
+    void inner_rollback_requires_new() {
 
         log.info("외부 트랜잭션 시작");
         TransactionStatus outer = txManger.getTransaction(new DefaultTransactionAttribute());
@@ -171,14 +171,7 @@ public class BasicTxTest {
         txManger.commit(outer); // 외부 커밋
 
 
-
-
-
     }
-
-
-
-
 
 
 }
